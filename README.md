@@ -1,61 +1,23 @@
-# TOC Project 2017
-
-Template Code for TOC Project 2017
-
-A telegram bot based on a finite state machine
-
+# INCBOT
+Telegram bot created with python
 ## Setup
-
-### Prerequisite
-* Python 3
-
-#### Install Dependency
-```sh
-pip install -r requirements.txt
-```
-
-* pygraphviz (For visualizing Finite State Machine)
-    * [Setup pygraphviz on Ubuntu](http://www.jianshu.com/p/a3da7ecc5303)
-
-### Secret Data
-
-`API_TOKEN` and `WEBHOOK_URL` in app.py **MUST** be set to proper values.
-Otherwise, you might not be able to run your code.
-
-### Run Locally
-You can either setup https server or using `ngrok` as a proxy.
-
-**`ngrok` would be used in the following instruction**
-
-```sh
-ngrok http 5000
-```
-
-After that, `ngrok` would generate a https URL.
-
-You should set `WEBHOOK_URL` (in app.py) to `your-https-URL/hook`.
-
-#### Run the sever
-
-```sh
-python3 app.py
-```
-
-## Finite State Machine
-![fsm](./img/show-fsm.png)
-
-## Usage
-The initial state is set to `user`.
-
-Every time `user` state is triggered to `advance` to another state, it will `go_back` to `user` state after the bot replies corresponding message.
-
-* user
-	* Input: "go to state1"
-		* Reply: "I'm entering state1"
-
-	* Input: "go to state2"
-		* Reply: "I'm entering state2"
-
-
-## Author
-[Lee-W](https://github.com/Lee-W)
+----
+### Prequisite
+* Install Python3
+* Install BeautifulSoup for crawling data
+## Server
+* Use `ngrok` as a proxy
+* `./ngrok http 8443` connect to port 8443
+## Finite State machine
+![](https://i.imgur.com/Yd2RMsE.png)
+## Description
+### Set local host
+* `./ngrok http 8443` connect to port 8443
+### Run the server
+* `python app.py`
+### Interact with INCBOT
+* **user state**: Type in **weather**, **financial**, **sport**, or **game** to get through each state.
+* **weather state**: Type in any word to show the current temperature and weather notification
+* **financial state**: Type in corressponding stock number to get it Chinese name
+* **game**: Type paper, sissors or stone to guess finger with the bot
+* In **weather**, **financial**, **sport**, or **game**, type **user** to go back to the user state
