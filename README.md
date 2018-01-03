@@ -5,9 +5,14 @@ Telegram bot created with python
 ### Prequisite
 * Install Python3
 * Install BeautifulSoup for crawling data
+* Install requirement.txt
 ## Server
 * Use `ngrok` as a proxy
 * `./ngrok http 8443` connect to port 8443
+### Secret Data
+
+`API_TOKEN` and `WEBHOOK_URL` in app.py **MUST** be set to proper values.
+Otherwise, you might not be able to run your code.
 ## Finite State machine
 ![](https://i.imgur.com/Yd2RMsE.png)
 ## Description
