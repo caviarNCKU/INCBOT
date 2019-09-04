@@ -5,7 +5,7 @@ import random
 class TocMachine(GraphMachine):
 	def __init__(self, **machine_configs):
 		self.machine = GraphMachine(
-		model = self,
+			model = self,
 			**machine_configs
 		)
 
@@ -17,19 +17,11 @@ class TocMachine(GraphMachine):
 		text = update.message.text
 		return text.lower() == 'financial'
 
-	def is_going_to_sport(self, update):
-		text = update.message.text
-		return text.lower() == 'sport'
-
 	def is_going_to_place(self, update):
 		text = update.message.text
 		return text.lower() == text.lower()
 
 	def is_going_to_stock_number(self, update):
-		text = update.message.text
-		return text.lower() == text.lower()
-
-	def is_going_to_nba123(self, update):
 		text = update.message.text
 		return text.lower() == text.lower()
 
@@ -43,7 +35,7 @@ class TocMachine(GraphMachine):
 
 	def on_enter_game(self, update):
 		if update.message.text == 'user':
-			update.message.reply_text("Choose weather, financial, sport, game")
+			update.message.reply_text("Choose weather, financial, game")
 			self.go_back(update)
 		else:
 			update.message.reply_text("paper,sissors,stone")
@@ -82,20 +74,9 @@ class TocMachine(GraphMachine):
 	def on_exit_finger(self, update):
 		print('Leaving finger')
 
-	def on_enter_nba123(self, update):
-		if update.message.text == 'user':
-			pass
-		#else:
-			#update.message.reply_text()
-		self.go_back(update)
-
-	def on_exit_nba123(self, update):
-		print('Leaving nba')
-
-
 	def on_enter_weather(self, update):
 		if update.message.text == 'user':
-			update.message.reply_text("Choose weather, financial, sport, game")
+			update.message.reply_text("Choose weather, financial, game")
 			self.go_back(update)
 		else:
 			update.message.reply_text("Press any word to show today's weather")
@@ -105,23 +86,13 @@ class TocMachine(GraphMachine):
 
 	def on_enter_financial(self, update):
 		if update.message.text == 'user':
-			update.message.reply_text("Choose weather, financial, sport, game")
+			update.message.reply_text("Choose weather, financial, game")
 			self.go_back(update)
 		else:
 			update.message.reply_text("Your stock number is")
 
 	def on_exit_financial(self, update):
 		print('Leaving financial')
-
-	def on_enter_sport(self, update):
-		if update.message.text == 'user':
-			update.message.reply_text("Choose weather, financial, sport, game")
-			self.go_back(update)
-		else:
-			update.message.reply_text("I'm entering sport")
-
-	def on_exit_sport(self, update):
-		print('Leaving sport');
 
 	def on_enter_place(self, update):
 		if update.message.text == 'user':
@@ -131,7 +102,7 @@ class TocMachine(GraphMachine):
 		self.go_back(update)	
 
 	def on_exit_place(self, update):
-		print('Leaving place');
+		print('Leaving place')
 
 	def on_enter_stock_number(self, update):
 		if update.message.text == 'user':
@@ -141,4 +112,4 @@ class TocMachine(GraphMachine):
 		self.go_back(update)
 
 	def on_exit_stock_number(self, update):
-		print('Leaving stocknum');
+		print('Leaving stocknum')

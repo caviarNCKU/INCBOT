@@ -1,4 +1,5 @@
 import sys
+import configparser
 from io import BytesIO
 
 import telegram
@@ -6,21 +7,21 @@ from flask import Flask, request, send_file
 
 from fsm import TocMachine
 
+config = configparser.ConfigParser()
+config.read('config.ini')
 
-API_TOKEN = '531101905:AAHvcXLR4j6Vfti-0Zu4PhnkXgFqZVAaba0'
-WEBHOOK_URL = 'https://dec41a82.ngrok.io/show-fsm'
+API_TOKEN = config['TELEGRAM']['ACCESS_TOKEN']
+WEBHOOK_URL = config['TELEGRAM']['WEBHOOK_URL'] + '/hook'
 
 app = Flask(__name__)
-bot = telegram.Bot(token=API_TOKEN)
+bot = telegram.Bot(API_TOKEN)
 machine = TocMachine(
     states=[
         'user',
         'weather',
         'financial',
-		'sport',
 		'place',
 		'stock_number',
-		'nba123',
 		'game',
 		'finger'
     ],
@@ -45,12 +46,6 @@ machine = TocMachine(
         },
 		{
             'trigger': 'advance',
-            'source': 'user',
-            'dest': 'sport',
-            'conditions': 'is_going_to_sport'
-        },
-		{
-            'trigger': 'advance',
             'source': 'weather',
             'dest': 'place',
             'conditions': 'is_going_to_place'
@@ -63,12 +58,6 @@ machine = TocMachine(
         },
 		{
             'trigger': 'advance',
-            'source': 'sport',
-            'dest': 'nba123',
-            'conditions': 'is_going_to_nba123'
-        },
-		{
-            'trigger': 'advance',
             'source': 'game',
             'dest': 'finger',
             'conditions': 'is_going_to_finger'
@@ -78,7 +67,6 @@ machine = TocMachine(
             'source': [
                 'weather',
                 'financial',
-				'sport',
 				'game'
             ],
             'dest': 'user'
@@ -96,13 +84,6 @@ machine = TocMachine(
 				'stock_number'
             ],
             'dest': 'financial'
-        },
-        {
-            'trigger': 'go_back',
-            'source': [
-				'nba123'
-            ],
-            'dest': 'sport'
         },
          {
             'trigger': 'go_back',
@@ -144,4 +125,4 @@ def show_fsm():
 
 if __name__ == "__main__":
     _set_webhook()
-    app.run(port = 8443)
+    app.run()
